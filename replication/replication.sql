@@ -5,7 +5,7 @@ create table logs(
   changes json,
   replied boolean default false,
   created_at timestamp not null default current_timestamp,
-  primary key (created_at, table_name)
+  primary key (created_at, table_name, action)
 );
 
 -- create master table
@@ -41,7 +41,7 @@ end;
 $BODY$
 language plpgsql volatile;
 
--- trigger 
+-- trigger
 create trigger trg_log_insert
 	after insert or update or delete on master_table
 	for each row

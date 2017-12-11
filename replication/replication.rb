@@ -9,20 +9,20 @@ class Replication
   end
 
   private
-  
+
   def insert_row(row)
     hash = eval(row[3])
     fields = hash.keys.join(', ')
     values = hash.values.join("', '")
     connection.exec("insert into stand_by_table (#{fields}) values ('#{values}')")
   end
-  
+
   def update_row(row)
     hash = eval(row[3])
     updates = hash.map { |k, v| "#{k} = '#{v}'" }.join(", ")
     connection.exec("update stand_by_table set #{updates} where id = #{row[0]}")
   end
-  
+
   def delete_row(row)
     connection.exec("delete from stand_by_table where id = #{row[0]}")
   end
