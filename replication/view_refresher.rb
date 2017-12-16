@@ -2,7 +2,7 @@ require "pg"
 
 class ViewRefresher
   def refresh
-    connection.exec("refresh materialized view concurrently master_table_logs_view")
+    connection.exec("refresh materialized view concurrently master_logs_view")
   end
 
   private
